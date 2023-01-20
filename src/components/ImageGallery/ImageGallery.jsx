@@ -1,10 +1,15 @@
 import ImageGalleryItem from 'components/ImageGalleryItem';
 import css from './image-gallery.module.css';
 
-const ImageGallery = ({ searchImg, page }) => {
+const ImageGallery = ({ query, page, items, onSearch }) => {
   return (
     <ul className={css.ImageGallery}>
-      <ImageGalleryItem searchImg={searchImg} page={page} />
+      <ImageGalleryItem
+        query={query}
+        page={page}
+        items={items}
+        onSearch={onSearch}
+      />
     </ul>
   );
 };

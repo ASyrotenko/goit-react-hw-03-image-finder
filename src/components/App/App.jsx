@@ -7,24 +7,38 @@ import Button from 'components/Button';
 
 class App extends Component {
   state = {
-    search: '',
+    query: '',
     page: 1,
+    items: [],
   };
-  handleFormSubmit = img => {
-    this.setState({ search: img, page: 1 });
+
+  handleFormSubmit = value => {
+    this.setState({ query: value, page: 1, items: [] });
   };
 
   handleOnLoadMoreClick = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
+
+  onSearch = response => {
+    this.setState(prevState => ({ items: [...prevState.items, ...response] }));
+  };
+
   render() {
     return (
       <>
         <ToastContainer autoClose={3000} />
         <Searchbar onSubmit={this.handleFormSubmit} />
         <main>
-          <ImageGallery searchImg={this.state.search} page={this.state.page} />
-          <Button onClick={this.handleOnLoadMoreClick} />
+          <ImageGallery
+            query={this.state.query}
+            page={this.state.page}
+            onSearch={this.onSearch}
+            items={this.state.items}
+          />
+          {this.state.items.length > 0 && (
+            <Button onClick={this.handleOnLoadMoreClick} />
+          )}
         </main>
       </>
     );

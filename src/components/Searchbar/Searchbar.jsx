@@ -6,22 +6,25 @@ import css from './searchbar.module.css';
 import { ReactComponent as Search } from '../icons/search.svg';
 
 class Searchbar extends Component {
-  state = {
-    img: '',
-  };
+  // state = {
+  //   query: '',
+  // };
 
-  handleChange = e => {
-    this.setState({ img: e.currentTarget.value });
-  };
+  // handleChange = e => {
+  //   this.setState({ query: e.currentTarget.value });
+  // };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.img.trim() === '') {
+    const { value } = e.currentTarget.elements.query;
+    if (value.trim() === '') {
       toast.error('Enter something to find.');
       return;
     }
-    this.props.onSubmit(this.state.img);
-    this.setState({ img: '' });
+    // console.log(e.currentTarget.elements.query.value);
+    this.props.onSubmit(value);
+    e.currentTarget.elements.query.value = '';
+    // this.setState({ query: '' });
   };
 
   render() {
@@ -35,13 +38,13 @@ class Searchbar extends Component {
 
           <input
             className={css.SearchFormInput}
-            name="img"
-            value={this.state.img}
+            name="query"
+            // value={this.state.query}
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            onChange={this.handleChange}
+            // onChange={this.handleChange}
           />
         </form>
       </header>

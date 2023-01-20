@@ -6,31 +6,33 @@ const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '31493701-066eddf0638dc5b7781a5a354';
 
 class ImageGalleryItem extends Component {
-  state = {
-    images: [],
-    totalHits: 0,
-    error: null,
-    status: 'idle',
-  };
+  // state = {
+  //   images: [],
+  //   totalHits: 0,
+  //   error: null,
+  //   status: 'idle',
+  // };
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log('prevProps.searchImg :', prevProps.searchImg);
-    console.log('this.props.searchImg :', this.props.searchImg);
+    // console.log('prevProps.query :', prevProps.query);
+    // console.log('this.props.query :', this.props.query);
 
-    console.log('prevState.images :', prevState.images);
-    console.log('this.props.images :', this.state.images);
+    // console.log('prevState.images :', prevState.images);
+    // console.log('this.props.images :', this.state.images);
 
     if (
-      prevProps.searchImg !== this.props.searchImg ||
+      prevProps.query !== this.props.query ||
       prevProps.page !== this.props.page
     ) {
       try {
         const response = await axios.get(
-          `${BASE_URL}?key=${API_KEY}&q=${this.props.searchImg}&image_type=photo&orientation=horizontal&per_page=12&page=${this.props.page}`
+          `${BASE_URL}?key=${API_KEY}&q=${this.props.query}&image_type=photo&orientation=horizontal&per_page=12&page=${this.props.page}`
         );
-        this.setState(prevState => ({
-          images: [...prevState.images, ...response.data.hits],
-        }));
+        // this.setState({
+        //   images: [...response.data.hits],
+        // });
+        this.props.onSearch(response.data.hits);
+        // console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -40,7 +42,7 @@ class ImageGalleryItem extends Component {
   render() {
     return (
       <>
-        {this.state.images.map(img => (
+        {this.props.items.map(img => (
           <li className={css.ImageGalleryItem} key={img.id}>
             <img
               src={img.webformatURL}
