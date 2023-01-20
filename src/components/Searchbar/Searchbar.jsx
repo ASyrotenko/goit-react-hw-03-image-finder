@@ -6,14 +6,6 @@ import css from './searchbar.module.css';
 import { ReactComponent as Search } from '../icons/search.svg';
 
 class Searchbar extends Component {
-  // state = {
-  //   query: '',
-  // };
-
-  // handleChange = e => {
-  //   this.setState({ query: e.currentTarget.value });
-  // };
-
   handleSubmit = e => {
     e.preventDefault();
     const { value } = e.currentTarget.elements.query;
@@ -21,10 +13,8 @@ class Searchbar extends Component {
       toast.error('Enter something to find.');
       return;
     }
-    // console.log(e.currentTarget.elements.query.value);
     this.props.onSubmit(value);
     e.currentTarget.elements.query.value = '';
-    // this.setState({ query: '' });
   };
 
   render() {
@@ -39,12 +29,10 @@ class Searchbar extends Component {
           <input
             className={css.SearchFormInput}
             name="query"
-            // value={this.state.query}
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            // onChange={this.handleChange}
           />
         </form>
       </header>
