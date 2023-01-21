@@ -3,24 +3,11 @@ import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 import css from './image-gallery.module.css';
 
-const ImageGallery = ({
-  query,
-  page,
-  items,
-  onSearch,
-  changeLoadingStatus,
-  loadingStatus,
-}) => {
+const ImageGallery = ({ loadingStatus, ...allyProps }) => {
   return (
     <>
       <ul className={css.ImageGallery}>
-        <ImageGalleryItem
-          query={query}
-          page={page}
-          items={items}
-          onSearch={onSearch}
-          changeLoadingStatus={changeLoadingStatus}
-        />
+        <ImageGalleryItem {...allyProps} />
       </ul>
       {loadingStatus && (
         <div className={css.loading}>
@@ -34,10 +21,5 @@ const ImageGallery = ({
 export default ImageGallery;
 
 ImageGallery.propTypes = {
-  query: PropTypes.string.isRequired,
-  page: PropTypes.number.isRequired,
-  items: PropTypes.array,
-  onSearch: PropTypes.func.isRequired,
-  changeLoadingStatus: PropTypes.func.isRequired,
   loadingStatus: PropTypes.bool,
 };

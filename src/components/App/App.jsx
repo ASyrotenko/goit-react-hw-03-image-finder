@@ -58,34 +58,34 @@ class App extends Component {
   };
 
   render() {
+    const { query, page, items, loadingStatus, totalItems, noResult } =
+      this.state;
     return (
       <>
         <ToastContainer autoClose={3000} />
         <Searchbar onSubmit={this.handleFormSubmit} />
         <main id="main">
-          {this.state.noResult && (
+          {noResult && (
             <p className={css.noFoundText}>
-              Sorry. There is no images for <b>{this.state.query}</b>
+              Sorry. There is no images for <b>{query}</b>
             </p>
           )}
           <ImageGallery
-            query={this.state.query}
-            page={this.state.page}
+            query={query}
+            page={page}
             onSearch={this.onSearch}
-            items={this.state.items}
+            items={items}
             changeLoadingStatus={this.changeLoadingStatus}
-            loadingStatus={this.state.loadingStatus}
+            loadingStatus={loadingStatus}
           />
-          {this.state.items.length > 0 &&
-            this.state.items.length < this.state.totalItems && (
-              <Button onClick={this.handleOnLoadMoreClick} />
-            )}
-          {this.state.items.length > 0 &&
-            this.state.items.length >= this.state.totalItems && (
-              <p className={css.endMessage}>
-                Sorry. There is no more images for <b>{this.state.query}</b>
-              </p>
-            )}
+          {items.length > 0 && items.length < totalItems && (
+            <Button onClick={this.handleOnLoadMoreClick} />
+          )}
+          {items.length > 0 && items.length >= totalItems && (
+            <p className={css.endMessage}>
+              Sorry. There is no more images for <b>{query}</b>
+            </p>
+          )}
         </main>
       </>
     );
