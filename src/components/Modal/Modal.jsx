@@ -1,16 +1,17 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import css from './modal.module.css';
 
 class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
+    // document.querySelector('body').classList.add('modalOpen');
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
+    // document.querySelector('body').classList.remove('modalOpen');
   }
-
-  
 
   handleKeyDown = e => {
     if (e.code === 'Escape') {
@@ -36,3 +37,9 @@ class Modal extends Component {
 }
 
 export default Modal;
+
+Modal.propTypes = {
+  url: PropTypes.string.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  alt: PropTypes.string,
+};

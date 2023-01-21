@@ -19,13 +19,13 @@ class App extends Component {
   componentDidUpdate() {
     if (this.state.items.length > 12) {
       const { height: cardHeight } = document
-  .querySelector("main")
-  .firstElementChild.getBoundingClientRect();
+        .querySelector('li')
+        .firstElementChild.getBoundingClientRect();
 
-window.scrollBy({
-  top: cardHeight * 2,
-  behavior: "smooth",
-});
+      window.scrollBy({
+        top: cardHeight * 2,
+        behavior: 'smooth',
+      });
     }
   }
 

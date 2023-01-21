@@ -1,4 +1,5 @@
 import { ThreeDots } from 'react-loader-spinner';
+import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 import css from './image-gallery.module.css';
 
@@ -31,3 +32,12 @@ const ImageGallery = ({
 };
 
 export default ImageGallery;
+
+ImageGallery.propTypes = {
+  query: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  items: PropTypes.array,
+  onSearch: PropTypes.func.isRequired,
+  changeLoadingStatus: PropTypes.func.isRequired,
+  loadingStatus: PropTypes.bool,
+};

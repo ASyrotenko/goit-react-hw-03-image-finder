@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 import css from './searchbar.module.css';
 import { ReactComponent as Search } from '../icons/search.svg';
@@ -13,6 +14,7 @@ class Searchbar extends Component {
       toast.error('Enter something to find.');
       return;
     }
+
     this.props.onSubmit(value);
     e.currentTarget.elements.query.value = '';
   };
@@ -33,6 +35,7 @@ class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
+            onChange={this.onChange}
           />
         </form>
       </header>
@@ -41,3 +44,7 @@ class Searchbar extends Component {
 }
 
 export default Searchbar;
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
